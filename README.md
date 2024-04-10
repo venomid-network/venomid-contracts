@@ -26,6 +26,8 @@ reverse resolution currently is in the form of listing names, primary names are 
 
 Venom ID operates on a system of dot-separated hierarchical names called domains, with the owner of a domain having full control over subdomains. Top-level domains, like '.venom' and '.test', are managed by the Root smart contract, which deploys new domain and subdomain certificates and ensures seamless integration between various components and interfaces.
 
+You can find an organized version of our docs at : [docs.venomid.network](https://docs.venomid.network/)
+
 
 ## Deployed domains
 
