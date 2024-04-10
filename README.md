@@ -73,9 +73,7 @@ yarn add --dev venom-connect everscale-inpage-provider everscale-standalone-clie
 
 ## Usage
 
-{% hint style="info" %}
 If you already have access to the provider object ( ProviderRpcClient ) in your environment, then you can ignore this step.
-{% endhint %}
 
 ```jsx
 import { VenomConnect } from "venom-connect";
