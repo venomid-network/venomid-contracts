@@ -48,27 +48,24 @@ The code examples given in this document assumes that it is executed within a DA
 
 To begin, let's establish a connection between our app and the Venom Wallet. 
 
-To accomplish this, we will utilize the (Venom-Connect)[https://www.npmjs.com/package/venom-connect] library. This library offers a convenient interface for creating a connect popup within our app for the Venom wallet, and also provides an interface for interacting with the Venom network. 
+To accomplish this, we will utilize the [Venom-Connect](https://www.npmjs.com/package/venom-connect) library. This library offers a convenient interface for creating a connect popup within our app for the Venom wallet, and also provides an interface for interacting with the Venom network. 
 
-{% hint style="info" %}
+hint: 
 For detailed information on how to use Venom-Connect, please refer to [Venom Docs](https://docs.venom.foundation/build/development-guides/how-to-create-your-own-fungible-tip-3-token/venom-in-action/extend-our-tokensale-with-frontend).
-{% endhint %}
 
 First, make sure to install the [`venom-connect`](https://www.npmjs.com/package/venom-connect) , [everscale-inpage-provider](https://www.npmjs.com/package/everscale-inpage-provider) and [everscale-standalone-client](https://www.npmjs.com/package/everscale-standalone-client) packages.
 
-{% tabs %}
-{% tab title="npm" %}
+
 ```bash
 npm install --save venom-connect everscale-inpage-provider everscale-standalone-client
 ```
-{% endtab %}
 
-{% tab title="yarn" %}
+or 
+
+
 ```bash
 yarn add --dev venom-connect everscale-inpage-provider everscale-standalone-client
 ```
-{% endtab %}
-{% endtabs %}
 
 ## Usage
 
@@ -97,17 +94,14 @@ const provider = await venomConnect.checkAuth();
 
 The goal here is to take a name, such as `sam.venom`, and convert it to an address, such as `0:4bc69a8c3889adee39f6f1e3b2353c86f960c9b835e93397a2015a62a4823765`
 
-{% hint style="info" %}
-&#x20;`sam.venom`➡️ `0:4bc6...3765`&#x20;
-{% endhint %}
 
-We will make use of the `provider` instance that we got in the [Getting Started](getting-started.md) section.
+&#x20;`sam.venom`➡️ `0:4bc6...3765`&#x20;
 
 ## Using Contract Methods And Abi
 
 <pre class="language-typescript"><code class="lang-typescript">import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 const { VENOMID_ROOT_CONTRACT_ADDRESS } from "./constants";
-// mainnet : 
+// mainnet : 0:2b353a0c36c4c86a48b0392c69017a109c8941066ed1747708fc63b1ac79e408
 
 import RootAbi from "abi/Root.abi.json"; 
 // https://github.com/sam-shariat/venomidapp/blob/main/abi/Root.abi.json
