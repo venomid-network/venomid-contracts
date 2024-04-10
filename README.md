@@ -42,27 +42,129 @@ Currently , our guides provide coverage of client in React and Next.js. As we co
 
 ### Prerequisites
 
-List any prerequisites required to use the project.
+The code examples given in this document assumes that it is executed within a DApp browser environment, such as Chrome with the [Venom Wallet](https://venomwallet.com/) extension installed. This environment provides access to the provider object. For additional information on how to connect to the venom blockchain please refer to [venom documentation](https://venom.guide/frontend/connect) 
 
 ### Installing
 
-Step-by-step instructions on how to install and set up the project.
+To begin, let's establish a connection between our app and the Venom Wallet. 
 
+To accomplish this, we will utilize the (Venom-Connect)[https://www.npmjs.com/package/venom-connect] library. This library offers a convenient interface for creating a connect popup within our app for the Venom wallet, and also provides an interface for interacting with the Venom network. 
+
+{% hint style="info" %}
+For detailed information on how to use Venom-Connect, please refer to [Venom Docs](https://docs.venom.foundation/build/development-guides/how-to-create-your-own-fungible-tip-3-token/venom-in-action/extend-our-tokensale-with-frontend).
+{% endhint %}
+
+First, make sure to install the [`venom-connect`](https://www.npmjs.com/package/venom-connect) , [everscale-inpage-provider](https://www.npmjs.com/package/everscale-inpage-provider) and [everscale-standalone-client](https://www.npmjs.com/package/everscale-standalone-client) packages.
+
+{% tabs %}
+{% tab title="npm" %}
+```bash
+npm install --save venom-connect everscale-inpage-provider everscale-standalone-client
+```
+{% endtab %}
+
+{% tab title="yarn" %}
+```bash
+yarn add --dev venom-connect everscale-inpage-provider everscale-standalone-client
+```
+{% endtab %}
+{% endtabs %}
 
 ## Usage
 
-## Resolve Domain
-### To get a dns record for a specific domain:
+{% hint style="info" %}
+If you already have access to the provider object ( ProviderRpcClient ) in your environment, then you can ignore this step.
+{% endhint %}
 
-On root contract for specific TLD call:
+```jsx
+import { VenomConnect } from "venom-connect";
+import { ProviderRpcClient } from "everscale-inpage-provider";
+
+const venomConnect = new VenomConnect({
+  // venom connect config
+  // check out https://codesandbox.io/p/devbox/venom-id-lookup-address-v95v7c
+});
+
+venomConnect.connect() // open pop up for venom wallet connection
+
+const provider = await venomConnect.checkAuth(); 
+// we need the provider instance for later
+
+```
+
+## Resolve Domain
+
+
+The goal here is to take a name, such as `sam.venom`, and convert it to an address, such as `0:4bc69a8c3889adee39f6f1e3b2353c86f960c9b835e93397a2015a62a4823765`
+
+{% hint style="info" %}
+&#x20;`sam.venom`➡️ `0:4bc6...3765`&#x20;
+{% endhint %}
+
+We will make use of the `provider` instance that we got in the [Getting Started](getting-started.md) section.
+
+## Using Contract Methods And Abi
+
+<pre class="language-typescript"><code class="lang-typescript">import { Address, ProviderRpcClient } from "everscale-inpage-provider";
+const { VENOMID_ROOT_CONTRACT_ADDRESS } from "./constants";
+// mainnet : 
+
+import RootAbi from "abi/Root.abi.json"; 
+// https://github.com/sam-shariat/venomidapp/blob/main/abi/Root.abi.json
+import DomainAbi from "abi/Domain.abi.json";
+// https://github.com/sam-shariat/venomidapp/blob/main/abi/Domain.abi.json
+
+async function lookupAddress
+(provider: ProviderRpcClient,path: string) 
+{
+  if (!provider) return;
+  
+<strong>  const rootContract = new provider.Contract(
+</strong>      RootAbi,
+      new Address(ROOT_CONTRACT_ADDRESS)
+    );
+    
+  const certificateAddr: { certificate: Address } = await rootContract.methods
+    .resolve({ path: path, answerId: 0 } as never)
+    .call({ responsible: true });
+
+  const domainContract = new provider.Contract(
+    DomainAbi,
+    certificateAddr.certificate
+  );
+  
+  try {
+  
+    const { target } = await domainContract.methods.resolve({ answerId: 0 } as never)
+      .call({ responsible: true });
+    
+    if (target) {
+      return String(target);
+    } else {
+      return "";
+    }
+  } catch (e) {
+    return ""
+  }
+}
+
+const targetAddress = await lookupAddress(provider,"sam.venom");
+console.log(targetAddress);
+// output : 0:4bc6...3765 
+</code></pre>
+
+
+### To get a dns record for a specific domain:
+On root contract :
 
 `resolve(string path) public view responsible returns (address certificate)`.
+example path : sam.venom
 
 This method will return the address of the domain certificate. Check if such account exists and then call methods for obtaining DNS records from it:
 
 `query(uint32 key) public view responsible returns (optional(TvmCell))`
 
-| ID  | description                                | ABI     |
+| Key | description                                | ABI     |
 |-----|--------------------------------------------|---------|
 | 0   | Venom account address (target address)     | address |
 | 1   | ETH address                                | string  |
