@@ -95,9 +95,8 @@ const provider = await venomConnect.checkAuth();
 The goal here is to take a name, such as `sam.venom`, and convert it to an address, such as `0:4bc69a8c3889adee39f6f1e3b2353c86f960c9b835e93397a2015a62a4823765`
 
 
-&#x20;`sam.venom`➡️ `0:4bc6...3765`&#x20;
+` sam.venom `➡️ ` 0:4bc6...3765 `
 
-## Using Contract Methods And Abi
 
 <pre class="language-typescript"><code class="lang-typescript">import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 const { VENOMID_ROOT_CONTRACT_ADDRESS } from "./constants";
@@ -113,8 +112,8 @@ async function lookupAddress
 {
   if (!provider) return;
   
-<strong>  const rootContract = new provider.Contract(
-</strong>      RootAbi,
+const rootContract = new provider.Contract(
+      RootAbi,
       new Address(ROOT_CONTRACT_ADDRESS)
     );
     
@@ -126,17 +125,32 @@ async function lookupAddress
     DomainAbi,
     certificateAddr.certificate
   );
-  
+
   try {
-  
-    const { target } = await domainContract.methods.resolve({ answerId: 0 } as never)
-      .call({ responsible: true });
-    
+
+    // Query the DNS record (key ID=0 to get the account address)
+    let result = await domainContract.methods.query({ key: 0, answerId: 1337 }).call({ responsible: true });
+
+    if (!result.value) {
+      console.log("No Account address record found");
+      return;
+    }
+
+    // Extract the Account address from the cell
+    const unpackedTargetAddress = await provider.unpackFromCell({
+      structure: [{ name: "address", type: "address" }] as const,
+      boc: result.value!,
+      allowPartial: true,
+    });
+
+    const target = unpackedTargetAddress.data.address.toString();
+
     if (target) {
       return String(target);
     } else {
       return "";
     }
+
   } catch (e) {
     return ""
   }
