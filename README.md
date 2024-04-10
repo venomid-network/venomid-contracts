@@ -37,9 +37,7 @@ Venom ID operates on a system of dot-separated hierarchical names called domains
 
 ## Getting Started
 
-Venom Domains smart contracts are a modification of [DeNS](https://github.com/tonred/DeNS) - at [EverName](https://evername.io/), you can view the contracts structure and information at [Evername Docs](https://ever-name-docs.netlify.app/).
-
-you can see the changes done on venom id at the end of this page.
+Venom Domains smart contracts are a modification of [DeNS](https://github.com/tonred/DeNS) - at [EverName](https://evername.io/), you can view the contracts structure and information at [Evername Docs](https://ever-name-docs.netlify.app/). you can see the changes done on venom id at the end of this page.
 
 You can call Venom ID from ton-solidity contracts or client/backend environments!
 Currently , our guides provide coverage of client in React and Next.js. As we continue to expand, we will incorporate additional tools and libraries to enhance our documents.
