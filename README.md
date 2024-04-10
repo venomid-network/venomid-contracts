@@ -37,7 +37,11 @@ Venom ID operates on a system of dot-separated hierarchical names called domains
 
 ## Getting Started
 
-You can call Venom ID from ton-solidity contracts or client/backend!
+Venom Domains smart contracts are a modification of [DeNS](https://github.com/tonred/DeNS) - at [EverName](https://evername.io/), you can view the contracts structure and information at [Evername Docs](https://ever-name-docs.netlify.app/).
+
+you can see the changes done on venom id at the end of this page.
+
+You can call Venom ID from ton-solidity contracts or client/backend environments!
 Currently , our guides provide coverage of client in React and Next.js. As we continue to expand, we will incorporate additional tools and libraries to enhance our documents.
 
 ### Prerequisites
@@ -181,7 +185,7 @@ This method will return the address of the domain certificate. Check if such acc
 
 
 ## Methods
-### [Root] (contracts/Root.sol)
+### [Root](contracts/Root.sol)
 1) Find certificate address by full path
 2) Create new domain
 3) Renew exist domains
@@ -192,7 +196,7 @@ This method will return the address of the domain certificate. Check if such acc
 
 &#43; All TIP4 (TIP4.1, TIP4.2, TIP4.3) methods
 
-### [Domain] (contracts/Domain.sol)
+### [Domain](contracts/Domain.sol)
 1) Resolve domain
 2) Query record(s)
 3) Change target or record
@@ -257,3 +261,41 @@ Only domain owner can call
 
 ## License:
 Apache 2.0 license.
+
+
+### changes
+
+major changes from [DeNS](https://github.com/tonred/DeNS) to Venom Domains
+
+- Vault and TIP3 wallet is removed from the contract
+- Registration changes : 
+
+DeNS (ever) : Send tokens and payload to root's TIP3 wallet with notify
+Venom ID : Send tokens and payload to root via `register` function
+
+- Domain Certificate and NFT Json Changes
+
+please check [Certificate.sol](contracts/abstract/Certificate.sol)  and [NFTCertificate.sol](contracts/abstract/NFTCertificate.sol) 
+
+<pre class="language-typescript"><code class="lang-typescript">
+
+uint32 constant TARGET_RECORD_ID = 0;
+uint32 constant TARGET_ETH_RECORD_ID = 1;
+uint32 constant DISPLAY_RECORD_ID = 10;
+uint32 constant AVATAR_RECORD_ID = 11;
+uint32 constant HEADER_RECORD_ID = 12;
+uint32 constant LOCATION_RECORD_ID = 13;
+uint32 constant URL_RECORD_ID = 14;
+uint32 constant DESCRIPTION_RECORD_ID = 15;
+uint32 constant COLOR_RECORD_ID = 16;
+uint32 constant BG_RECORD_ID = 17;
+uint32 constant TEXTCOLOR_RECORD_ID = 18;
+uint32 constant STYLES_RECORD_ID = 19;
+
+uint32 constant TWITTER_RECORD_ID = 20;
+uint32 constant LINKS_RECORD_ID = 30;
+uint32 constant IPFS_RECORD_ID = 33;
+
+</code></pre>
+
+-All other functions are the same

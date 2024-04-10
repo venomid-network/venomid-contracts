@@ -28,7 +28,6 @@ library Constants {
     uint32 constant LOCATION_RECORD_ID = 13;
     uint32 constant URL_RECORD_ID = 14;
     uint32 constant DESCRIPTION_RECORD_ID = 15;
-    uint32 constant NOTICE_RECORD_ID = 15;
     uint32 constant COLOR_RECORD_ID = 16;
     uint32 constant BG_RECORD_ID = 17;
     uint32 constant TEXTCOLOR_RECORD_ID = 18;
