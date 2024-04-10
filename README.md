@@ -37,7 +37,8 @@ Venom ID operates on a system of dot-separated hierarchical names called domains
 
 ## Getting Started
 
-Currently , our guides provide coverage of React and Next.js. As we continue to expand, we will incorporate additional tools and libraries to enhance our documents.
+You can call Venom ID from ton-solidity contracts or client/backend!
+Currently , our guides provide coverage of client in React and Next.js. As we continue to expand, we will incorporate additional tools and libraries to enhance our documents.
 
 ### Prerequisites
 
@@ -84,7 +85,7 @@ This method will return the address of the domain certificate. Check if such acc
 
 
 ## Methods
-### Root
+### [Root] (contracts/Root.sol)
 1) Find certificate address by full path
 2) Create new domain
 3) Renew exist domains
@@ -95,7 +96,7 @@ This method will return the address of the domain certificate. Check if such acc
 
 &#43; All TIP4 (TIP4.1, TIP4.2, TIP4.3) methods
 
-### Domain & Subdomain
+### [Domain] (contracts/Domain.sol)
 1) Resolve domain
 2) Query record(s)
 3) Change target or record
