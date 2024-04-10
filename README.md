@@ -250,7 +250,10 @@ Only domain owner can call
 
 ## Contributing
 
-Instructions on how to contribute to the project, including guidelines for pull requests and code reviews.
+- Fork the project
+- Create a topic branch from master
+- Make commits to improve the project and push your branch
+- Open a Pull Request
 
-License:
+## License:
 Apache 2.0 license.
