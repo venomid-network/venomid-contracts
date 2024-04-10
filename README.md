@@ -268,17 +268,14 @@ Apache 2.0 license.
 major changes from [DeNS](https://github.com/tonred/DeNS) to Venom Domains
 
 - Vault and TIP3 wallet is removed from the contract
-- Registration changes : 
-
-DeNS (ever) : Send tokens and payload to root's TIP3 wallet with notify
-Venom ID : Send tokens and payload to root via `register` function
-
+- Registration : Send tokens and payload to root via `register` function instead of sending to TIP3 wallet
 - Domain Certificate and NFT Json Changes
 
 please check [Certificate.sol](contracts/abstract/Certificate.sol)  and [NFTCertificate.sol](contracts/abstract/NFTCertificate.sol) 
 
-<pre class="language-typescript"><code class="lang-typescript">
+following keys are defined as constants and are being returned in the domain json
 
+<pre class="language-typescript"><code class="lang-typescript">
 uint32 constant TARGET_RECORD_ID = 0;
 uint32 constant TARGET_ETH_RECORD_ID = 1;
 uint32 constant DISPLAY_RECORD_ID = 10;
@@ -295,7 +292,6 @@ uint32 constant STYLES_RECORD_ID = 19;
 uint32 constant TWITTER_RECORD_ID = 20;
 uint32 constant LINKS_RECORD_ID = 30;
 uint32 constant IPFS_RECORD_ID = 33;
-
 </code></pre>
 
 -All other functions are the same
