@@ -319,8 +319,8 @@ Only domain owner can call
 
 ## Examples
 
-React example live on [CodeSandBox](https://codesandbox.io/p/devbox/venom-id-lookup-address-forked-2q8yx2?file=%2Fsrc%2FApp.jsx%3A80%2C26-80%2C32)
-NextJs example on [Github](https://github.com/venomid-network/vid-sdk-nextjs-starter) / [Live on Vercel](https://vid-sdk-nextjs-starter.vercel.app/)
+- React example live on [CodeSandBox](https://codesandbox.io/p/devbox/venom-id-lookup-address-forked-2q8yx2?file=%2Fsrc%2FApp.jsx%3A80%2C26-80%2C32)
+- NextJs example on [Github](https://github.com/venomid-network/vid-sdk-nextjs-starter) / [Live on Vercel](https://vid-sdk-nextjs-starter.vercel.app/)
 
 ## Contributing
 
